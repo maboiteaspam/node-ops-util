@@ -1,0 +1,14 @@
+{
+  "name": "node-ops-util",
+  "version": "1.0.0",
+  "description": "various operations command line tool generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ssh2-pool": "^0.9.0"
+  },
+  "author": "maboiteaspam",
+  "license": "WTF"
+}
