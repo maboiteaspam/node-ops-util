@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "commander": "^2.8.0",
+    "npmlog": "^1.2.0",
     "ssh2-pool": "^0.9.0"
   },
   "author": "maboiteaspam",

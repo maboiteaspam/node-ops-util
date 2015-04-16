@@ -1,12 +1,17 @@
 
 var pkg = require('./package.json');
 var SSH2pool = require('ssh2-pool');
+var log = require('npmlog');
 
-var pool = new SSH2pool();
+var NodeOps = function(servers){
+  this.pool = new SSH2pool(servers);
+  this.log = log;
+};
 
-var NodeOps = function(){};
+NodeOps.prototype.push = function( env, localPath, remotePath, options ){
 
-NodeOps.prototype.push = function( env, localPath, remotePath, tmpRemotePath ){
+  var tmpRemotePath = options.tmp || '/tmp';
+  var pool = this.pool;
 
   pool.env(env).putDir(localPath, tmpRemotePath, function(){
 
@@ -25,7 +30,19 @@ NodeOps.prototype.push = function( env, localPath, remotePath, tmpRemotePath ){
 
 };
 
+NodeOps.prototype.run = function( env, cmd ){
+
+  var pool = this.pool;
+
+  pool.env(env).sshRun([cmd], function(){
+    log.info('run', 'done');
+  });
+
+};
+
 NodeOps.prototype.tail = function(env, filePath, options){
+
+  var pool = this.pool;
 
   var dowhat = (options.do || 'tail');
 
@@ -49,11 +66,11 @@ NodeOps.prototype.tail = function(env, filePath, options){
   });
 };
 
-NodeOps.prototype.apache = require('./extras/apache.js');
-NodeOps.prototype.app = require('./extras/app.js');
-NodeOps.prototype.mysql = require('./extras/mysql.js');
-NodeOps.prototype.newrelic = require('./extras/newrelic.js');
-NodeOps.prototype.php = require('./extras/php.js');
-NodeOps.prototype.varnish = require('./extras/varnish.js');
+require('./extras/apache.js')(NodeOps);
+require('./extras/app.js');
+require('./extras/mysql.js');
+require('./extras/newrelic.js');
+require('./extras/php.js');
+require('./extras/varnish.js');
 
-  module.exports = NodeOps;
+module.exports = NodeOps;
