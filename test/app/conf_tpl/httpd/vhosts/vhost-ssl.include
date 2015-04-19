@@ -1,0 +1,14 @@
+<% var http = profile.http %>
+<% var app = profile.app %>
+
+SSLEngine on
+SSLProtocol ALL -SSLv2 -SSLv3
+
+SSLCipherSuite ALL:+HIGH:!ADH:!LOW:!SSLv2:!EXP
+SSLCertificateFile <%= http.EtcPath %>/custom/ssl/server.crt
+SSLCertificateKeyFile <%= http.EtcPath %>/custom/ssl/server.key
+SSLCertificateChainFile <%= http.EtcPath %>/custom/ssl/intermediate.ca
+
+SetEnvIf User-Agent ".*MSIE.*" \
+        nokeepalive ssl-unclean-shutdown \
+        downgrade-1.0 force-response-1.0

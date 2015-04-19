@@ -1,0 +1,30 @@
+{
+  "precise64":{
+    "http":{
+      "LogPath":"/var/log/httpd",
+      "EtcPath":"/etc/httpd",
+      "port":80,
+      "sslPort":443
+    },
+    "app":{
+      "RootPath":"/var/www/html"
+    },
+    "mysql":{
+
+    }
+  },
+  "centos":{
+    "http":{
+      "LogPath":"/var/log/httpd",
+      "EtcPath":"/etc/httpd",
+      "port":80,
+      "sslPort":443
+    },
+    "app":{
+      "RootPath":"/var/www/html"
+    },
+    "mysql":{
+
+    }
+  }
+}
