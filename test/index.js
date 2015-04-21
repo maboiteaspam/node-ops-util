@@ -1,8 +1,8 @@
 
 process.env['NPM_LOG'] = process.env['NPM_LOG']
+|| 'silly'
 || 'info'
 || 'verbose'
-|| 'silly'
 ;
 
 require('should');
@@ -70,7 +70,7 @@ describe('ssh', function(){
   this.timeout(50000)
   it('say hello', function(done){
     op.exec( ':pool1', 'echo hello', function(err,stdout){
-      stdout.should.match(/hello/)
+      stdout.should.match(/hello/);
       done();
     });
   });
